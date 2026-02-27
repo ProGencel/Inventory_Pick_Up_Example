@@ -30,6 +30,7 @@ public class Main extends Game {
     {
         manager.setLoader(TiledMap.class,mapLoader);
         manager.load("World/world.tmx", TiledMap.class);
+        manager.load("bunnyWalk.png", Texture.class);
         manager.finishLoading();
     }
 }
