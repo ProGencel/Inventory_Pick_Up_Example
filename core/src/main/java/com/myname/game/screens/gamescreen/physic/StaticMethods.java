@@ -5,9 +5,11 @@ import static com.myname.game.screens.gamescreen.utils.Constants.*;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.myname.game.screens.gamescreen.utils.ExceptionSafety;
 
 public class StaticMethods {
 
@@ -22,7 +24,7 @@ public class StaticMethods {
     {
         Array<MapObject> array = new Array<>();
 
-        MapLayer layer = map.getLayers().get(mapLayer);
+        MapLayer layer = ExceptionSafety.safeLayer(map,mapLayer);
 
         for(MapObject mapObject : layer.getObjects().getByType(clazz))
         {
@@ -39,7 +41,7 @@ public class StaticMethods {
 
     public static <T extends MapObject> MapObject findWantedMapbject(TiledMap map, String mapLayer, String wantedClass, Class<T> clazz)
     {
-        MapLayer layer = map.getLayers().get(mapLayer);
+        MapLayer layer = ExceptionSafety.safeLayer(map,mapLayer);
 
         for(MapObject mapObject : layer.getObjects().getByType(clazz))
         {
@@ -51,10 +53,10 @@ public class StaticMethods {
             }
         }
 
-        return null;
+        throw new IllegalStateException("Object cannot find");
     }
 
-    public static void createBody(BodyDef.BodyType bodyType, World world, Vector2 pos,Vector2 mes, ShapeType shapeType)
+    public static Body createBody(BodyDef.BodyType bodyType, World world, Vector2 pos,Vector2 mes, ShapeType shapeType)
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
@@ -86,6 +88,16 @@ public class StaticMethods {
 
         assert shape != null : "Shape error !";
         shape.dispose();
+
+        return body;
+    }
+
+    public static void ppmRectangle(Rectangle rectangle)
+    {
+        rectangle.x *= PPM;
+        rectangle.y *= PPM;
+        rectangle.height *= PPM;
+        rectangle.width *= PPM;
     }
 
 }

@@ -21,8 +21,8 @@ public class MapCamManager {
     {
         tiledMap = manager.get("World/world.tmx");
         camera = new OrthographicCamera();
-        viewport = new FitViewport(10,10,camera);
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,PPM,batch);
+        viewport = new FitViewport(BASIC_SCREEN_WIDTH * PPM,BASIC_SCREEN_HEIGHT * PPM,camera);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, PPM,batch);
 
         camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
     }

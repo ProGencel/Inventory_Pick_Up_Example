@@ -47,4 +47,9 @@ public class PhysicWorld {
         return world;
     }
 
+    public void dispose()
+    {
+        world.dispose();
+    }
+
 }
