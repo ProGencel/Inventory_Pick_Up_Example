@@ -5,7 +5,6 @@ import static com.myname.game.screens.gamescreen.utils.Constants.*;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -40,13 +39,13 @@ public class StaticMethods {
         return array;
     }
 
-    public static <T extends MapObject> MapObject findWantedMapbject(TiledMap map, String mapLayer, String wantedClass, Class<T> clazz)
+    public static <T extends MapObject> MapObject findWantedMapobject(TiledMap map, String mapLayer, String wantedClass, Class<T> clazz)
     {
         MapLayer layer = ExceptionSafety.safeLayer(map,mapLayer);
 
         for(MapObject mapObject : layer.getObjects().getByType(clazz))
         {
-            String wantedType = mapObject.getProperties().get("type", String.class);
+            String wantedType = ExceptionSafety.safeTiledClass(mapObject,wantedClass);
 
             if(wantedType.equals(wantedClass))
             {

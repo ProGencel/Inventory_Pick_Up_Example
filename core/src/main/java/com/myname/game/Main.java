@@ -30,8 +30,8 @@ public class Main extends Game {
     private void loadAssets()
     {
         manager.setLoader(TiledMap.class,mapLoader);
-        manager.load("World/world.tmx", TiledMap.class);
-        manager.load("Sprites/Bunny.atlas", TextureAtlas.class);
+        manager.load("World/map.tmx", TiledMap.class);
+        manager.load("Sprites/Char.atlas", TextureAtlas.class);
         manager.finishLoading();
     }
 }

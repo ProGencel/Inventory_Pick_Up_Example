@@ -1,9 +1,8 @@
 package com.myname.game.screens.gamescreen.utils;
 
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Rectangle;
 
 public class ExceptionSafety {
 
@@ -17,6 +16,18 @@ public class ExceptionSafety {
         else
         {
             return layer;
+        }
+    }
+
+    public static String safeTiledClass(MapObject mapObject, String wantedClass)
+    {
+        if(mapObject.getProperties().get("type", String.class) == null)
+        {
+            throw new IllegalStateException(wantedClass+" cannot find");
+        }
+        else
+        {
+            return mapObject.getProperties().get("type", String.class);
         }
     }
 

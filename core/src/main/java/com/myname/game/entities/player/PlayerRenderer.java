@@ -20,9 +20,9 @@ public class PlayerRenderer {
     public PlayerRenderer(AssetManager assetManager, Player player)
     {
         this.player = player;
-        atlas = assetManager.get("Sprites/Bunny.atlas");
-        Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions("karakter_walk_right");
-        walkRightAnim = new Animation<>(0.1f, frames, Animation.PlayMode.LOOP);
+        atlas = assetManager.get("Sprites/Char.atlas");
+        Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions("right_idle");
+        walkRightAnim = new Animation<>(0.4f, frames, Animation.PlayMode.LOOP);
 
     }
 
@@ -35,8 +35,8 @@ public class PlayerRenderer {
         float playerX = player.getEllipse().x - (float) (currentFrame.getRegionWidth() / 2) * PPM;
         float playerY = player.getEllipse().y;
 
-        float playerWidth = (currentFrame.getRegionWidth() * PPM) * 2;
-        float playerHeight = (currentFrame.getRegionHeight() * PPM) * 2;
+        float playerWidth = currentFrame.getRegionWidth() * PPM;
+        float playerHeight = currentFrame.getRegionHeight() * PPM;
 
         batch.draw(currentFrame,playerX,playerY,playerWidth,playerHeight);
     }

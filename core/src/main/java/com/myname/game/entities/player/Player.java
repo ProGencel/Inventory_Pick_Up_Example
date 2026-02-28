@@ -8,7 +8,6 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Ellipse;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -34,7 +33,7 @@ public class Player extends GameEntity {
 
     public Player(AssetManager manager, TiledMap map, World world)
     {
-        playerCircObj = (EllipseMapObject) StaticMethods.findWantedMapbject(map,"Objects","Player", EllipseMapObject.class);
+        playerCircObj = (EllipseMapObject) StaticMethods.findWantedMapobject(map,"Objects","Player", EllipseMapObject.class);
 
         ellipse = playerCircObj.getEllipse();
 

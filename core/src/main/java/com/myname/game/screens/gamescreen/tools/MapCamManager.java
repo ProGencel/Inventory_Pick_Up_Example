@@ -19,7 +19,7 @@ public class MapCamManager {
 
     public MapCamManager(AssetManager manager, SpriteBatch batch)
     {
-        tiledMap = manager.get("World/world.tmx");
+        tiledMap = manager.get("World/map.tmx");
         camera = new OrthographicCamera();
         viewport = new FitViewport(BASIC_SCREEN_WIDTH * PPM,BASIC_SCREEN_HEIGHT * PPM,camera);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, PPM,batch);
