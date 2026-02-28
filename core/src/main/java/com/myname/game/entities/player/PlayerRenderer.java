@@ -21,7 +21,7 @@ public class PlayerRenderer {
     {
         this.player = player;
         atlas = assetManager.get("Sprites/Char.atlas");
-        Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions("right_idle");
+        Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions("idle_right");
         walkRightAnim = new Animation<>(0.4f, frames, Animation.PlayMode.LOOP);
 
     }
@@ -32,7 +32,8 @@ public class PlayerRenderer {
 
         TextureRegion currentFrame = walkRightAnim.getKeyFrame(stateTime);
 
-        float playerX = player.getEllipse().x - (float) (currentFrame.getRegionWidth() / 2) * PPM;
+        float playerX = player.getEllipse().x -
+            (float) (currentFrame.getRegionWidth() / 2) * PPM + player.getEllipse().width/2;
         float playerY = player.getEllipse().y;
 
         float playerWidth = currentFrame.getRegionWidth() * PPM;

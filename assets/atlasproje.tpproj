@@ -34,7 +34,7 @@ prettyPrint=false
 legacyOutput=false
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:Sprites/down_idle_0.png,type:Input,regionName:null},{path:Sprites/down_idle_1.png,type:Input,regionName:null},{path:Sprites/left_idle_6.png,type:Input,regionName:null},{path:Sprites/left_idle_7.png,type:Input,regionName:null},{path:Sprites/right_idle_4.png,type:Input,regionName:null},{path:Sprites/right_idle_5.png,type:Input,regionName:null},{path:Sprites/up_idle_2.png,type:Input,regionName:null},{path:Sprites/up_idle_3.png,type:Input,regionName:null}]
+inputFiles=[{path:BeforeAtlas,type:Input,dirFilePrefix:null,recursive:false,flattenPaths:false}]
 keepInputFileExtensions=false
 
 

@@ -33,7 +33,7 @@ public class Player extends GameEntity {
 
     public Player(AssetManager manager, TiledMap map, World world)
     {
-        playerCircObj = (EllipseMapObject) StaticMethods.findWantedMapobject(map,"Objects","Player", EllipseMapObject.class);
+        playerCircObj = (EllipseMapObject) StaticMethods.findWantedMapObject(map,"Objects","Player", EllipseMapObject.class);
 
         ellipse = playerCircObj.getEllipse();
 

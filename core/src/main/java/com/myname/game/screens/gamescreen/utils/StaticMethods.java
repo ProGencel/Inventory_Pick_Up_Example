@@ -20,7 +20,7 @@ public class StaticMethods {
         Polygon
     }
 
-    public static <T extends MapObject> Array<MapObject> findWantedMapbjects(TiledMap map, String mapLayer, String wantedClass, Class<T> clazz)
+    public static <T extends MapObject> Array<MapObject> findWantedMapObjects(TiledMap map, String mapLayer, String wantedClass, Class<T> clazz)
     {
         Array<MapObject> array = new Array<>();
 
@@ -39,7 +39,7 @@ public class StaticMethods {
         return array;
     }
 
-    public static <T extends MapObject> MapObject findWantedMapobject(TiledMap map, String mapLayer, String wantedClass, Class<T> clazz)
+    public static <T extends MapObject> MapObject findWantedMapObject(TiledMap map, String mapLayer, String wantedClass, Class<T> clazz)
     {
         MapLayer layer = ExceptionSafety.safeLayer(map,mapLayer);
 

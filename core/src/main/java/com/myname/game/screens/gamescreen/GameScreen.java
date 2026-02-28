@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
 
         ScreenUtils.clear(Color.GRAY);
 
-        manager.render(delta);
+        manager.render(delta,player);
 
         batch.setProjectionMatrix(manager.getCamera().combined);
         batch.begin();

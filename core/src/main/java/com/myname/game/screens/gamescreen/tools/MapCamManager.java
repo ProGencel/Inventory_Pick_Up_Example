@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.myname.game.entities.player.Player;
 
 public class MapCamManager {
 
@@ -27,14 +28,16 @@ public class MapCamManager {
         camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
     }
 
-    public void update(float dt)
+    public void update(float dt, Player player)
     {
+        camera.position.x = player.getEllipse().x;
+        camera.position.y = player.getEllipse().y;
         camera.update();
     }
 
-    public void render(float dt)
+    public void render(float dt, Player player)
     {
-        update(dt);
+        update(dt, player);
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
     }
