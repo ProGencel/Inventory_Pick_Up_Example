@@ -1,22 +1,23 @@
-package com.myname.game.screens.gamescreen.physic;
+package com.myname.game.screens.gamescreen.utils;
 
 import static com.myname.game.screens.gamescreen.utils.Constants.*;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.myname.game.screens.gamescreen.utils.ExceptionSafety;
 
 public class StaticMethods {
 
     public enum ShapeType
     {
         Rectangle,
-        Circle,
+        Ellipse,
         Polygon
     }
 
@@ -69,9 +70,9 @@ public class StaticMethods {
 
         switch (shapeType)
         {
-            case Circle -> {
+            case Ellipse -> {
                 shape = new CircleShape();
-                shape.setRadius(mes.x * PPM);
+                shape.setRadius(mes.x/2);
 
                 fdef.shape = shape;
             }
@@ -92,12 +93,20 @@ public class StaticMethods {
         return body;
     }
 
-    public static void ppmRectangle(Rectangle rectangle)
+    public static void ppmShape(Rectangle rectangle)
     {
         rectangle.x *= PPM;
         rectangle.y *= PPM;
         rectangle.height *= PPM;
         rectangle.width *= PPM;
+    }
+
+    public static void ppmShape(Ellipse ellipse)
+    {
+        ellipse.x *= PPM;
+        ellipse.y *= PPM;
+        ellipse.height *= PPM;
+        ellipse.width *= PPM;
     }
 
 }

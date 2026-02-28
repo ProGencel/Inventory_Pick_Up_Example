@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.myname.game.screens.gamescreen.physic.StaticMethods;
+import com.myname.game.screens.gamescreen.utils.StaticMethods;
 
 public class StaticEntity extends GameEntity{
 
@@ -21,7 +21,7 @@ public class StaticEntity extends GameEntity{
 
     private Array<Rectangle> hitboxRecs;
 
-    public StaticEntity(TiledMapTileMapObject mapObject, World world, TiledMap map)
+    public StaticEntity(TiledMapTileMapObject mapObject, World world)
     {
         rectangle = new Rectangle();
 
@@ -34,10 +34,10 @@ public class StaticEntity extends GameEntity{
 
 
         hitboxRecs = new Array<>();
-        setHitboxRecs(mapObject,world,map);
+        setHitboxRecs(mapObject,world);
     }
 
-    private void setHitboxRecs(TiledMapTileMapObject mapObject, World world, TiledMap map)
+    private void setHitboxRecs(TiledMapTileMapObject mapObject, World world)
     {
         for(RectangleMapObject rectangleMapObject : mapObject.getTile().getObjects().getByType(RectangleMapObject.class))
         {

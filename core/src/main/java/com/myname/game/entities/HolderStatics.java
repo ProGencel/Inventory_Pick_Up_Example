@@ -2,13 +2,10 @@ package com.myname.game.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.objects.PointMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.myname.game.screens.gamescreen.physic.StaticMethods;
 
 public class HolderStatics {
 
@@ -26,7 +23,7 @@ public class HolderStatics {
 
         for(TiledMapTileMapObject mapObject : layer.getObjects().getByType(TiledMapTileMapObject.class))
         {
-            StaticEntity staticEntity = new StaticEntity(mapObject,world,map);
+            StaticEntity staticEntity = new StaticEntity(mapObject,world);
             statics.add(staticEntity);
         }
     }

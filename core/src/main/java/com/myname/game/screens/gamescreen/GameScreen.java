@@ -52,6 +52,7 @@ public class GameScreen implements Screen {
         batch.begin();
 
         holderStatics.draw(batch);
+        player.render(delta,batch);
 
         batch.end();
 
