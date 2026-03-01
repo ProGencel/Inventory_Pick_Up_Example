@@ -46,10 +46,16 @@ public class Player extends GameEntity {
     private EllipseMapObject playerCircObj;
 
     private TextureAtlas atlas;
+
     public Animation<TextureRegion> idleLeftAnimation;
     public Animation<TextureRegion> idleRightAnimation;
     public Animation<TextureRegion> idleUpAnimation;
     public Animation<TextureRegion> idleDownAnimation;
+
+    public Animation<TextureRegion> walkLeftAnimation;
+    public Animation<TextureRegion> walkRightAnimation;
+    public Animation<TextureRegion> walkUpAnimation;
+    public Animation<TextureRegion> walkDownAnimation;
 
     private PlayerRenderer playerRenderer;
 
@@ -114,6 +120,19 @@ public class Player extends GameEntity {
 
         frames = atlas.findRegions("idle_down");
         idleDownAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
+
+
+        frames = atlas.findRegions("walk_right");
+        walkRightAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
+
+        frames = atlas.findRegions("walk_left");
+        walkLeftAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
+
+        frames = atlas.findRegions("walk_up");
+        walkUpAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
+
+        frames = atlas.findRegions("walk_down");
+        walkDownAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
     }
 
     public void setDirection(Direction direction)

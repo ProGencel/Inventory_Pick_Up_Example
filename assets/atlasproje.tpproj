@@ -1,6 +1,6 @@
 name=Char
 filename=
-output=.
+output=Sprites
 
 alias=true
 alphaThreshold=0

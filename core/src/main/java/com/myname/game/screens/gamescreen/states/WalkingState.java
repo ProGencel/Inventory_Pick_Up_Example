@@ -81,19 +81,19 @@ public class WalkingState implements State{
     public Animation<TextureRegion> getAnimation() {
         if(player.getDirection().equals(Player.Direction.RIGHT))
         {
-            return player.idleRightAnimation;
+            return player.walkRightAnimation;
         }
         if(player.getDirection().equals(Player.Direction.LEFT))
         {
-            return player.idleLeftAnimation;
+            return player.walkLeftAnimation;
         }
         if(player.getDirection().equals(Player.Direction.UP))
         {
-            return player.idleUpAnimation;
+            return player.walkUpAnimation;
         }
         if(player.getDirection().equals(Player.Direction.DOWN))
         {
-            return player.idleDownAnimation;
+            return player.walkDownAnimation;
         }
         return null;
     }

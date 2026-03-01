@@ -26,6 +26,8 @@ public class MapCamManager {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, PPM,batch);
 
         camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
+
+        camera.zoom /= ZOOM_CONSTANT;
     }
 
     public void cameraUpdate(float dt, Player player)
