@@ -6,4 +6,5 @@ public interface Constants {
     int BASIC_SCREEN_WIDTH = 640;
     int BASIC_SCREEN_HEIGHT = 360;
 
+    float PLAYER_SPEED = 10;
 }

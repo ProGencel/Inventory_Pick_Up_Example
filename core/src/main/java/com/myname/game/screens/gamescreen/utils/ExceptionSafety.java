@@ -3,6 +3,8 @@ package com.myname.game.screens.gamescreen.utils;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.myname.game.entities.player.Player;
+import com.myname.game.screens.gamescreen.states.State;
 
 public class ExceptionSafety {
 
@@ -28,6 +30,26 @@ public class ExceptionSafety {
         else
         {
             return mapObject.getProperties().get("type", String.class);
+        }
+    }
+
+    public static void safelyExitState(State state)
+    {
+        try{
+            state.exit();
+        } catch (Exception e)
+        {
+
+        }
+    }
+
+    public static void setPlayerVelocityToZeroSafely(Player player)
+    {
+        try{
+            player.getBody().setLinearVelocity(0,0);
+        }catch (Exception e)
+        {
+
         }
     }
 

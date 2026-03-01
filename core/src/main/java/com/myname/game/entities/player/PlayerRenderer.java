@@ -32,9 +32,9 @@ public class PlayerRenderer {
 
         TextureRegion currentFrame = walkRightAnim.getKeyFrame(stateTime);
 
-        float playerX = player.getEllipse().x -
-            (float) (currentFrame.getRegionWidth() / 2) * PPM + player.getEllipse().width/2;
-        float playerY = player.getEllipse().y;
+        float playerX = player.getBody().getPosition().x -
+            (float) (currentFrame.getRegionWidth() / 2) * PPM;
+        float playerY = player.getBody().getPosition().y;
 
         float playerWidth = currentFrame.getRegionWidth() * PPM;
         float playerHeight = currentFrame.getRegionHeight() * PPM;

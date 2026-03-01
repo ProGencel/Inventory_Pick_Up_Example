@@ -1,5 +1,6 @@
 package com.myname.game.entities.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,6 +31,7 @@ public class Player extends GameEntity {
     private Array<MapObject> mapObjectArray;
 
     private PlayerRenderer playerRenderer;
+    private PlayerController playerController;
 
     public Player(AssetManager manager, TiledMap map, World world)
     {
@@ -40,6 +42,8 @@ public class Player extends GameEntity {
         StaticMethods.ppmShape(ellipse);
 
         playerRenderer = new PlayerRenderer(manager,this);
+        playerController = new PlayerController(this);
+        Gdx.input.setInputProcessor(playerController);
 
         body = StaticMethods.createBody(BodyDef.BodyType.DynamicBody,world,new Vector2(ellipse.x,ellipse.y),
             new Vector2(ellipse.width,ellipse.height), StaticMethods.ShapeType.Ellipse);
@@ -48,6 +52,7 @@ public class Player extends GameEntity {
     public void render(float dt, SpriteBatch batch)
     {
         playerRenderer.render(dt,batch);
+        playerController.getPlayerState().update(dt);
     }
 
     public Ellipse getEllipse()
@@ -55,4 +60,12 @@ public class Player extends GameEntity {
         return ellipse;
     }
 
+    public PlayerController getPlayerController()
+    {
+        return playerController;
+    }
+
+    public Body getBody() {
+        return body;
+    }
 }
