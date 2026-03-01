@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.myname.game.screens.gamescreen.states.IdleState;
 import com.myname.game.screens.gamescreen.states.State;
+import com.myname.game.screens.gamescreen.states.WalkingState;
 import com.myname.game.screens.gamescreen.utils.ExceptionSafety;
 
 public class PlayerController implements InputProcessor {
@@ -12,7 +13,7 @@ public class PlayerController implements InputProcessor {
 
     public PlayerController(Player player)
     {
-        setPlayerState(new IdleState(player));
+        setPlayerState(player.getIdleState());
     }
 
     public void setPlayerState(State state)

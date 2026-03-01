@@ -44,7 +44,7 @@ public class IdleState implements State{
 
         if(isWalking)
         {
-            player.getPlayerController().setPlayerState(new WalkingState(player));
+            player.getPlayerController().setPlayerState(player.getWalkingState());
         }
     }
 

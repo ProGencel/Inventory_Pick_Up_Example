@@ -17,6 +17,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.myname.game.entities.GameEntity;
+import com.myname.game.screens.gamescreen.states.IdleState;
+import com.myname.game.screens.gamescreen.states.WalkingState;
 import com.myname.game.screens.gamescreen.utils.StaticMethods;
 
 public class Player extends GameEntity {
@@ -28,6 +30,9 @@ public class Player extends GameEntity {
         RIGHT,
         LEFT
     }
+
+    private IdleState idleState;
+    private WalkingState walkingState;
 
     private Direction direction;
 
@@ -47,12 +52,24 @@ public class Player extends GameEntity {
     public Animation<TextureRegion> idleDownAnimation;
 
     private PlayerRenderer playerRenderer;
+
+    public IdleState getIdleState() {
+        return idleState;
+    }
+
+    public WalkingState getWalkingState() {
+        return walkingState;
+    }
+
     private PlayerController playerController;
 
     public Player(AssetManager manager, TiledMap map, World world)
     {
         atlas = manager.get("Sprites/Char.atlas", TextureAtlas.class);
         setTextures();
+
+        idleState = new IdleState(this);
+        walkingState = new WalkingState(this);
 
         direction = Direction.RIGHT;
 

@@ -55,7 +55,7 @@ public class WalkingState implements State{
 
         if(currentSpeed.isZero())
         {
-            player.getPlayerController().setPlayerState(new IdleState(player));
+            player.getPlayerController().setPlayerState(player.getIdleState());
         }
 
         if(currentSpeed.x != 0 || currentSpeed.y != 0)
