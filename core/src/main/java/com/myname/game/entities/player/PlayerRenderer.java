@@ -11,18 +11,14 @@ import com.badlogic.gdx.utils.Array;
 
 public class PlayerRenderer {
 
-    private TextureAtlas atlas;
-    private Animation<TextureRegion> walkRightAnim;
+
     private float stateTime = 0;
 
     private Player player;
 
-    public PlayerRenderer(AssetManager assetManager, Player player)
+    public PlayerRenderer(Player player)
     {
         this.player = player;
-        atlas = assetManager.get("Sprites/Char.atlas");
-        Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions("idle_right");
-        walkRightAnim = new Animation<>(0.4f, frames, Animation.PlayMode.LOOP);
 
     }
 
@@ -30,7 +26,7 @@ public class PlayerRenderer {
     {
         stateTime += dt;
 
-        TextureRegion currentFrame = walkRightAnim.getKeyFrame(stateTime);
+        TextureRegion currentFrame = player.getPlayerController().getPlayerState().getAnimation().getKeyFrame(stateTime);
 
         float playerX = player.getBody().getPosition().x -
             (float) (currentFrame.getRegionWidth() / 2) * PPM;

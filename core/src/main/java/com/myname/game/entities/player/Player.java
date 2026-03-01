@@ -3,7 +3,9 @@ package com.myname.game.entities.player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
@@ -19,6 +21,16 @@ import com.myname.game.screens.gamescreen.utils.StaticMethods;
 
 public class Player extends GameEntity {
 
+    public enum Direction
+    {
+        UP,
+        DOWN,
+        RIGHT,
+        LEFT
+    }
+
+    private Direction direction;
+
     private Texture texture;
     private TextureRegion textureRegion;
 
@@ -28,20 +40,28 @@ public class Player extends GameEntity {
 
     private EllipseMapObject playerCircObj;
 
-    private Array<MapObject> mapObjectArray;
+    private TextureAtlas atlas;
+    public Animation<TextureRegion> idleLeftAnimation;
+    public Animation<TextureRegion> idleRightAnimation;
+    public Animation<TextureRegion> idleUpAnimation;
+    public Animation<TextureRegion> idleDownAnimation;
 
     private PlayerRenderer playerRenderer;
     private PlayerController playerController;
 
     public Player(AssetManager manager, TiledMap map, World world)
     {
-        playerCircObj = (EllipseMapObject) StaticMethods.findWantedMapObject(map,"Objects","Player", EllipseMapObject.class);
+        atlas = manager.get("Sprites/Char.atlas", TextureAtlas.class);
+        setTextures();
 
+        direction = Direction.RIGHT;
+
+        playerCircObj = (EllipseMapObject) StaticMethods.findWantedMapObject(map,"Objects","Player", EllipseMapObject.class);
         ellipse = playerCircObj.getEllipse();
 
         StaticMethods.ppmShape(ellipse);
 
-        playerRenderer = new PlayerRenderer(manager,this);
+        playerRenderer = new PlayerRenderer(this);
         playerController = new PlayerController(this);
         Gdx.input.setInputProcessor(playerController);
 
@@ -55,11 +75,6 @@ public class Player extends GameEntity {
         playerController.getPlayerState().update(dt);
     }
 
-    public Ellipse getEllipse()
-    {
-        return ellipse;
-    }
-
     public PlayerController getPlayerController()
     {
         return playerController;
@@ -67,5 +82,30 @@ public class Player extends GameEntity {
 
     public Body getBody() {
         return body;
+    }
+
+    private void setTextures()
+    {
+        Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions("idle_right");
+        idleRightAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
+
+        frames = atlas.findRegions("idle_left");
+        idleLeftAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
+
+        frames = atlas.findRegions("idle_up");
+        idleUpAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
+
+        frames = atlas.findRegions("idle_down");
+        idleDownAnimation = new Animation<>(0.4f,frames, Animation.PlayMode.LOOP);
+    }
+
+    public void setDirection(Direction direction)
+    {
+        this.direction = direction;
+    }
+
+    public Direction getDirection()
+    {
+        return direction;
     }
 }

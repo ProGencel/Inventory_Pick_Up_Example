@@ -1,12 +1,17 @@
 package com.myname.game.screens.gamescreen.states;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 public interface State {
 
-    public void input(int keycode);
+    Animation<TextureRegion> getAnimation();
 
-    public void update(float dt);
+    void input(int keycode);
 
-    public void enter();
-    public void exit();
+    void update(float dt);
+
+    void enter();
+    void exit();
 
 }

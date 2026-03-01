@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="9">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="12">
  <tileset firstgid="1" name="Grass" tilewidth="32" tileheight="32" tilecount="64" columns="8">
   <image source="Grass.png" width="256" height="256"/>
  </tileset>
@@ -69,5 +69,8 @@
   <object id="8" type="Player" x="826.87" y="794.87" width="5.13043" height="5.13043">
    <ellipse/>
   </object>
+  <object id="9" gid="65" x="800" y="640" width="32" height="32"/>
+  <object id="10" gid="65" x="896" y="672" width="32" height="32"/>
+  <object id="11" gid="65" x="736" y="672" width="32" height="32"/>
  </objectgroup>
 </map>

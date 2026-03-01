@@ -2,6 +2,8 @@ package com.myname.game.screens.gamescreen.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.myname.game.entities.player.Player;
 import com.myname.game.screens.gamescreen.utils.Constants;
@@ -17,16 +19,6 @@ public class WalkingState implements State{
         currentSpeed = new Vector2(0,0);
     }
 
-    public enum Direction
-    {
-        UP,
-        DOWN,
-        RIGHT,
-        LEFT
-    }
-
-    public Direction direction = Direction.RIGHT;
-
     @Override
     public void input(int keycode) {
     }
@@ -40,25 +32,25 @@ public class WalkingState implements State{
         if(Gdx.input.isKeyPressed(Input.Keys.W))
         {
             currentSpeed.y = 1;
-            direction = Direction.UP;
+            player.setDirection(Player.Direction.UP);
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.S))
         {
             currentSpeed.y = -1;
-            direction = Direction.DOWN;
+            player.setDirection(Player.Direction.DOWN);
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.A))
         {
             currentSpeed.x = -1;
-            direction = Direction.LEFT;
+            player.setDirection(Player.Direction.LEFT);
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.D))
         {
             currentSpeed.x = 1;
-            direction = Direction.RIGHT;
+            player.setDirection(Player.Direction.RIGHT);
         }
 
         if(currentSpeed.isZero())
@@ -84,4 +76,26 @@ public class WalkingState implements State{
     public void exit() {
         System.out.println("WalkingState exited");
     }
+
+    @Override
+    public Animation<TextureRegion> getAnimation() {
+        if(player.getDirection().equals(Player.Direction.RIGHT))
+        {
+            return player.idleRightAnimation;
+        }
+        if(player.getDirection().equals(Player.Direction.LEFT))
+        {
+            return player.idleLeftAnimation;
+        }
+        if(player.getDirection().equals(Player.Direction.UP))
+        {
+            return player.idleUpAnimation;
+        }
+        if(player.getDirection().equals(Player.Direction.DOWN))
+        {
+            return player.idleDownAnimation;
+        }
+        return null;
+    }
+
 }
