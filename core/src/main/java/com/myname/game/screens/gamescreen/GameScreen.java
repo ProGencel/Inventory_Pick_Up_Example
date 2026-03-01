@@ -1,6 +1,5 @@
 package com.myname.game.screens.gamescreen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
@@ -44,9 +43,12 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
+        physicWorld.updatePhysic(delta);
+
         ScreenUtils.clear(Color.GRAY);
 
-        manager.render(delta,player);
+        manager.cameraUpdate(delta,player);
+        manager.mapRender(delta);
 
         batch.setProjectionMatrix(manager.getCamera().combined);
         batch.begin();
@@ -56,7 +58,7 @@ public class GameScreen implements Screen {
 
         batch.end();
 
-        physicWorld.render(delta);
+        physicWorld.render();
     }
 
     @Override

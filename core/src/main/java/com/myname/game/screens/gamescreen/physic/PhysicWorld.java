@@ -1,7 +1,6 @@
 package com.myname.game.screens.gamescreen.physic;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.myname.game.screens.gamescreen.tools.MapCamManager;
@@ -23,13 +22,15 @@ public class PhysicWorld {
         debugRenderer = new Box2DDebugRenderer();
     }
 
-    public void render(float dt)
+    public void updatePhysic(float dt)
     {
         doPhysicsStep(dt);
-        debugRenderer.render(world,manager.getCamera().combined);
     }
 
-
+    public void render()
+    {
+        debugRenderer.render(world,manager.getCamera().combined);
+    }
 
     private void doPhysicsStep(float deltaTime) {
         // fixed time step

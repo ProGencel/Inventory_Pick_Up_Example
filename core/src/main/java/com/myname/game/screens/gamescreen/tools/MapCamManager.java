@@ -28,16 +28,16 @@ public class MapCamManager {
         camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
     }
 
-    public void update(float dt, Player player)
+    public void cameraUpdate(float dt, Player player)
     {
-        camera.position.x = player.getEllipse().x;
-        camera.position.y = player.getEllipse().y;
+        camera.position.x = player.getBody().getPosition().x;
+        camera.position.y = player.getBody().getPosition().y;
         camera.update();
     }
 
-    public void render(float dt, Player player)
+    public void mapRender(float dt)
     {
-        update(dt, player);
+
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
     }
