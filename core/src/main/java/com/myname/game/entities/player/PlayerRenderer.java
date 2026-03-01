@@ -35,6 +35,7 @@ public class PlayerRenderer {
         float playerWidth = currentFrame.getRegionWidth() * PPM;
         float playerHeight = currentFrame.getRegionHeight() * PPM;
 
+
         batch.draw(currentFrame,playerX,playerY,playerWidth,playerHeight);
     }
 

@@ -10,4 +10,5 @@ public interface Constants {
 
     //Player
     float PLAYER_SPEED = 3;
+    float PLAYER_SENSOR_DISTANCE = 1f;
 }

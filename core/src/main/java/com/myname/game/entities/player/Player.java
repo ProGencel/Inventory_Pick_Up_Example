@@ -12,13 +12,12 @@ import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.myname.game.entities.GameEntity;
 import com.myname.game.screens.gamescreen.states.IdleState;
 import com.myname.game.screens.gamescreen.states.WalkingState;
+import com.myname.game.screens.gamescreen.utils.Constants;
 import com.myname.game.screens.gamescreen.utils.StaticMethods;
 
 public class Player extends GameEntity {
@@ -47,6 +46,8 @@ public class Player extends GameEntity {
 
     private TextureAtlas atlas;
 
+    private Body sensorBody;
+
     public Animation<TextureRegion> idleLeftAnimation;
     public Animation<TextureRegion> idleRightAnimation;
     public Animation<TextureRegion> idleUpAnimation;
@@ -61,6 +62,10 @@ public class Player extends GameEntity {
 
     public IdleState getIdleState() {
         return idleState;
+    }
+
+    public Body getSensorBody() {
+        return sensorBody;
     }
 
     public WalkingState getWalkingState() {
@@ -90,6 +95,8 @@ public class Player extends GameEntity {
 
         body = StaticMethods.createBody(BodyDef.BodyType.DynamicBody,world,new Vector2(ellipse.x,ellipse.y),
             new Vector2(ellipse.width,ellipse.height), StaticMethods.ShapeType.Ellipse);
+
+        setSensor();
     }
 
     public void render(float dt, SpriteBatch batch)
@@ -143,5 +150,20 @@ public class Player extends GameEntity {
     public Direction getDirection()
     {
         return direction;
+    }
+
+    public void setSensor()
+    {
+        CircleShape sensorShape = new CircleShape();
+        sensorShape.setRadius(Constants.PLAYER_SENSOR_DISTANCE);
+
+        FixtureDef fdef = new FixtureDef();
+        fdef.isSensor = true;
+        fdef.shape = sensorShape;
+
+        Fixture sensorFixture = body.createFixture(fdef);
+
+        sensorShape.dispose();
+
     }
 }
