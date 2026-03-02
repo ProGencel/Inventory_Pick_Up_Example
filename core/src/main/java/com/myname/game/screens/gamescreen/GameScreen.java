@@ -12,13 +12,17 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.myname.game.entities.HolderStatics;
 import com.myname.game.entities.player.Player;
+import com.myname.game.events.EventManager;
+import com.myname.game.events.playerStatusEvent.PlayerStatusEvent;
+import com.myname.game.events.playerStatusEvent.PlayerStatusEventListener;
 import com.myname.game.screens.gamescreen.inventory.Inventory;
 import com.myname.game.screens.gamescreen.physic.ContactHandler;
 import com.myname.game.screens.gamescreen.physic.PhysicWorld;
+import com.myname.game.screens.gamescreen.states.InventoryState;
 import com.myname.game.screens.gamescreen.tools.MapCamManager;
 import com.myname.game.screens.gamescreen.utils.Constants;
 
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, PlayerStatusEventListener {
 
     private MapCamManager manager;
     private PhysicWorld physicWorld;
@@ -60,6 +64,8 @@ public class GameScreen implements Screen {
 
         Gdx.input.setInputProcessor(inputMultiplexer);
         stage.setDebugAll(true);
+
+        EventManager.subscribe(this);
     }
 
     @Override
@@ -87,6 +93,7 @@ public class GameScreen implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.E))
         {
+            EventManager.newPlayerStatusEvent(new PlayerStatusEvent(new InventoryState()));
             inventory.onVisible();
         }
 
@@ -118,4 +125,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {}
+
+    @Override
+    public void responsePlayerStatusEvent(PlayerStatusEvent event) {
+        player.getPlayerController().setPlayerState(player.getIdleState());
+        inputMultiplexer.removeProcessor(player.getPlayerController());
+    }
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Slot extends Button {
 
-
     public Slot(TextureRegionDrawable texture)
     {
         super(texture);

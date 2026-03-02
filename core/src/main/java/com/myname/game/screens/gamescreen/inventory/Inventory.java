@@ -1,5 +1,7 @@
 package com.myname.game.screens.gamescreen.inventory;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -28,6 +30,8 @@ public class Inventory {
         offVisible();
 
         mainTable.add(slotTable);
+        setMainTableBackground();
+
         stage.addActor(mainTable);
     }
 
@@ -66,6 +70,20 @@ public class Inventory {
             slotArray.add(slot);
             slotTable.add(slot);
         }
+    }
+
+    private void setMainTableBackground()
+    {
+        Pixmap pixmap = new Pixmap(1,1, Pixmap.Format.RGBA8888);
+        pixmap.setColor(0,0,0,0.7f);
+        pixmap.fill();
+
+        Texture texture = new Texture(pixmap);
+        TextureRegionDrawable drawable = new TextureRegionDrawable(texture);
+
+        mainTable.setBackground(drawable);
+
+        pixmap.dispose();
     }
 
 }
