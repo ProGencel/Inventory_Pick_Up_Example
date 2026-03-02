@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
         holderStatics = new HolderStatics(manager.getTiledMap(),physicWorld.getWorld());
         player = new Player(assetManager,manager.getTiledMap(),physicWorld.getWorld());
 
-        inventory = new Inventory(assetManager,stage);
+        inventory = new Inventory(assetManager.get("Sprites/Char.atlas"),stage);
 
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(inventory.getStage());

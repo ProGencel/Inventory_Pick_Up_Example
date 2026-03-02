@@ -1,26 +1,33 @@
 package com.myname.game.screens.gamescreen.inventory;
 
-import static com.myname.game.screens.gamescreen.utils.Constants.*;
-
-import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 
 public class Inventory {
 
     private Stage stage;
     private Table mainTable;
+    private Table slotTable;
 
-    public Inventory(AssetManager assetManager,Stage stage)
+    private Array<Slot> slotArray;
+
+    public Inventory(TextureAtlas atlas,Stage stage)
     {
         this.stage = stage;
+
+        slotArray = new Array<>();
+        slotTable = new Table();
+        setSlots(new TextureRegionDrawable(atlas.findRegion("slot")));
 
         mainTable = new Table();
         mainTable.setFillParent(true);
         offVisible();
 
+        mainTable.add(slotTable);
         stage.addActor(mainTable);
     }
 
@@ -49,6 +56,16 @@ public class Inventory {
     {
         mainTable.setVisible(true);
         mainTable.setTouchable(Touchable.enabled);
+    }
+
+    private void setSlots(TextureRegionDrawable texture)
+    {
+        for(int i = 0; i<5;i++)
+        {
+            Slot slot = new Slot(texture);
+            slotArray.add(slot);
+            slotTable.add(slot);
+        }
     }
 
 }
