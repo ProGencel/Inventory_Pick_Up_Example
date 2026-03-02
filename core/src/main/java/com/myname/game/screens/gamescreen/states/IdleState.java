@@ -55,12 +55,10 @@ public class IdleState implements State{
 
     @Override
     public void enter() {
-        System.out.println("IdleState entered");
         ExceptionSafety.setPlayerVelocityToZeroSafely(player);
     }
 
     @Override
     public void exit() {
-        System.out.println("IdleState exited");
     }
 }

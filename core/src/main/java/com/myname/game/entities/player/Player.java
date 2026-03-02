@@ -1,5 +1,7 @@
 package com.myname.game.entities.player;
 
+import static com.myname.game.screens.gamescreen.utils.Constants.*;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -162,6 +164,9 @@ public class Player extends GameEntity {
         fdef.shape = sensorShape;
 
         Fixture sensorFixture = body.createFixture(fdef);
+        sensorFixture.setUserData(PLAYER_SENSOR);
+
+        body.getFixtureList().first().setUserData(PLAYER_HITBOX);
 
         sensorShape.dispose();
 

@@ -84,7 +84,7 @@ public class StaticMethods {
             }
         }
 
-        Fixture fixture = body.createFixture(fdef);
+        body.createFixture(fdef);
 
         assert shape != null : "Shape error !";
         shape.dispose();

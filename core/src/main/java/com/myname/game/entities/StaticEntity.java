@@ -9,15 +9,20 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.myname.game.screens.gamescreen.interfaces.Interactable;
 import com.myname.game.screens.gamescreen.utils.StaticMethods;
 
-public class StaticEntity extends GameEntity{
+public class StaticEntity extends GameEntity implements Interactable {
 
     private TextureRegion texture;
     private Rectangle rectangle;
+
+    private Body body;
 
     private Array<Rectangle> hitboxRecs;
 
@@ -56,8 +61,11 @@ public class StaticEntity extends GameEntity{
 
         for(Rectangle rec : hitboxRecs)
         {
-            StaticMethods.createBody(BodyDef.BodyType.StaticBody,world,new Vector2(rec.x,rec.y),
+            body = StaticMethods.createBody(BodyDef.BodyType.StaticBody,world,new Vector2(rec.x,rec.y),
                 new Vector2(rec.width,rec.height), StaticMethods.ShapeType.Rectangle);
+            Fixture firstFixture = body.getFixtureList().get(0);
+            firstFixture.setUserData(STATIC_DATA);
+
         }
     }
 
@@ -66,4 +74,8 @@ public class StaticEntity extends GameEntity{
         batch.draw(texture,rectangle.x,rectangle.y,rectangle.width,rectangle.height);
     }
 
+    @Override
+    public void interact() {
+        System.out.println("asd");
+    }
 }

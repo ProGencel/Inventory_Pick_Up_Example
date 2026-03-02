@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.myname.game.entities.HolderStatics;
 import com.myname.game.entities.player.Player;
+import com.myname.game.screens.gamescreen.physic.ContactHandler;
 import com.myname.game.screens.gamescreen.physic.PhysicWorld;
 import com.myname.game.screens.gamescreen.tools.MapCamManager;
 
@@ -23,6 +24,8 @@ public class GameScreen implements Screen {
 
     private Player player;
 
+    private ContactHandler contactHandler;
+
     public GameScreen(AssetManager assetManager)
     {
         this.assetManager = assetManager;
@@ -30,6 +33,7 @@ public class GameScreen implements Screen {
 
         manager = new MapCamManager(assetManager,batch);
         physicWorld = new PhysicWorld(manager);
+        contactHandler = new ContactHandler(physicWorld.getWorld());
 
         holderStatics = new HolderStatics(manager.getTiledMap(),physicWorld.getWorld());
         player = new Player(assetManager,manager.getTiledMap(),physicWorld.getWorld());

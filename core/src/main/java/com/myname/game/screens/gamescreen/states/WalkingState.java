@@ -69,12 +69,10 @@ public class WalkingState implements State{
 
     @Override
     public void enter() {
-        System.out.println("WalkingState entered");
     }
 
     @Override
     public void exit() {
-        System.out.println("WalkingState exited");
     }
 
     @Override
