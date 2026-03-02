@@ -4,12 +4,10 @@ import static com.myname.game.screens.gamescreen.utils.Constants.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Ellipse;
@@ -37,9 +35,6 @@ public class Player extends GameEntity {
 
     private Direction direction;
 
-    private Texture texture;
-    private TextureRegion textureRegion;
-
     private Ellipse ellipse;
 
     private Body body;
@@ -62,6 +57,12 @@ public class Player extends GameEntity {
 
     private PlayerRenderer playerRenderer;
 
+    public WalkingState getWalkingState() {
+        return walkingState;
+    }
+
+    private PlayerController playerController;
+
     public IdleState getIdleState() {
         return idleState;
     }
@@ -69,12 +70,6 @@ public class Player extends GameEntity {
     public Body getSensorBody() {
         return sensorBody;
     }
-
-    public WalkingState getWalkingState() {
-        return walkingState;
-    }
-
-    private PlayerController playerController;
 
     public Player(AssetManager manager, TiledMap map, World world)
     {

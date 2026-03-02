@@ -28,7 +28,7 @@ public class PlayerController implements InputProcessor {
 
         playerState.input(keycode);
 
-        return true;
+        return false;
     }
 
     @Override

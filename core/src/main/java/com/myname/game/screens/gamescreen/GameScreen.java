@@ -1,15 +1,22 @@
 package com.myname.game.screens.gamescreen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.myname.game.entities.HolderStatics;
 import com.myname.game.entities.player.Player;
+import com.myname.game.screens.gamescreen.inventory.Inventory;
 import com.myname.game.screens.gamescreen.physic.ContactHandler;
 import com.myname.game.screens.gamescreen.physic.PhysicWorld;
 import com.myname.game.screens.gamescreen.tools.MapCamManager;
+import com.myname.game.screens.gamescreen.utils.Constants;
 
 public class GameScreen implements Screen {
 
@@ -26,10 +33,17 @@ public class GameScreen implements Screen {
 
     private ContactHandler contactHandler;
 
+    private InputMultiplexer inputMultiplexer;
+
+    private Inventory inventory;
+
+    private Stage stage;
+
     public GameScreen(AssetManager assetManager)
     {
         this.assetManager = assetManager;
         batch = new SpriteBatch();
+        stage = new Stage(new ExtendViewport(Constants.BASIC_SCREEN_WIDTH,Constants.BASIC_SCREEN_HEIGHT));
 
         manager = new MapCamManager(assetManager,batch);
         physicWorld = new PhysicWorld(manager);
@@ -37,6 +51,15 @@ public class GameScreen implements Screen {
 
         holderStatics = new HolderStatics(manager.getTiledMap(),physicWorld.getWorld());
         player = new Player(assetManager,manager.getTiledMap(),physicWorld.getWorld());
+
+        inventory = new Inventory(assetManager,stage);
+
+        inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(inventory.getStage());
+        inputMultiplexer.addProcessor(player.getPlayerController());
+
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        stage.setDebugAll(true);
     }
 
     @Override
@@ -62,6 +85,14 @@ public class GameScreen implements Screen {
 
         batch.end();
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E))
+        {
+            inventory.onVisible();
+        }
+
+        stage.act();
+        stage.draw();
+
         physicWorld.render();
     }
 
@@ -71,6 +102,7 @@ public class GameScreen implements Screen {
         manager.dispose();
         batch.dispose();
         physicWorld.dispose();
+        stage.dispose();
     }
 
     @Override
