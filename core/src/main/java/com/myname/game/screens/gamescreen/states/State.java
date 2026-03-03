@@ -5,6 +5,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public interface State {
 
+    enum EnumState
+    {
+        WALK,
+        IDLE,
+        INVENTORY
+    }
+
+    EnumState getEnumState();
+
     Animation<TextureRegion> getAnimation();
 
     void input(int keycode);

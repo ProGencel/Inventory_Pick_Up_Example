@@ -46,8 +46,8 @@ public class ExceptionSafety {
     public static void setPlayerVelocityToZeroSafely(Player player)
     {
         try{
-            player.getBody().setLinearVelocity(0,0);
-        }catch (Exception e)
+            player.setPlayerSpeedZero();
+        }catch (Exception ignored)
         {
 
         }

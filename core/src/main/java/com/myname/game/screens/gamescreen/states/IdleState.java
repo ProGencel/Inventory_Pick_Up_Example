@@ -16,6 +16,11 @@ public class IdleState implements State{
     }
 
     @Override
+    public EnumState getEnumState() {
+        return EnumState.IDLE;
+    }
+
+    @Override
     public Animation<TextureRegion> getAnimation() {
         if(player.getDirection().equals(Player.Direction.RIGHT))
         {

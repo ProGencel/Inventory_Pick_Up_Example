@@ -76,6 +76,11 @@ public class WalkingState implements State{
     }
 
     @Override
+    public EnumState getEnumState() {
+        return EnumState.WALK;
+    }
+
+    @Override
     public Animation<TextureRegion> getAnimation() {
         if(player.getDirection().equals(Player.Direction.RIGHT))
         {

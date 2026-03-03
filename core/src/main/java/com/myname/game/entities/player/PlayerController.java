@@ -2,7 +2,10 @@ package com.myname.game.entities.player;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.myname.game.events.EventManager;
+import com.myname.game.events.playerStatusEvent.PlayerStatusEvent;
 import com.myname.game.screens.gamescreen.states.IdleState;
+import com.myname.game.screens.gamescreen.states.InventoryState;
 import com.myname.game.screens.gamescreen.states.State;
 import com.myname.game.screens.gamescreen.states.WalkingState;
 import com.myname.game.screens.gamescreen.utils.ExceptionSafety;
@@ -20,13 +23,20 @@ public class PlayerController implements InputProcessor {
     {
         ExceptionSafety.safelyExitState(playerState);
         playerState = state;
-        playerState.enter();
+        state.enter();
     }
 
     @Override
     public boolean keyDown(int keycode) {
 
-        playerState.input(keycode);
+        if(keycode == Input.Keys.E)
+        {
+            EventManager.newPlayerStatusEvent(new PlayerStatusEvent(State.EnumState.INVENTORY));
+        }
+        else
+        {
+            playerState.input(keycode);
+        }
 
         return false;
     }

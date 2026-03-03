@@ -4,11 +4,14 @@ import com.myname.game.screens.gamescreen.states.State;
 
 public class PlayerStatusEvent {
 
-    public PlayerStatusEvent(State state)
+    private State.EnumState enumState;
+
+    public PlayerStatusEvent(State.EnumState enumState)
     {
-        playerState = state;
+        this.enumState = enumState;
     }
 
-    public State playerState;
-
+    public State.EnumState getEnumState() {
+        return enumState;
+    }
 }

@@ -8,8 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+import com.myname.game.events.EventManager;
+import com.myname.game.events.playerStatusEvent.PlayerStatusEvent;
+import com.myname.game.events.playerStatusEvent.PlayerStatusEventListener;
+import com.myname.game.screens.gamescreen.states.InventoryState;
+import com.myname.game.screens.gamescreen.states.State;
 
-public class Inventory {
+public class Inventory implements PlayerStatusEventListener {
 
     private Stage stage;
     private Table mainTable;
@@ -33,6 +38,8 @@ public class Inventory {
         setMainTableBackground();
 
         stage.addActor(mainTable);
+
+        EventManager.subscribe(this);
     }
 
     public void onVisible()
@@ -86,4 +93,19 @@ public class Inventory {
         pixmap.dispose();
     }
 
+    @Override
+    public void responsePlayerStatusEvent(PlayerStatusEvent event) {
+
+        if(event.getEnumState().equals(State.EnumState.INVENTORY))
+        {
+            if(!mainTable.isVisible())
+            {
+                onVisible();
+            }
+            else
+            {
+                offVisible();
+            }
+        }
+    }
 }

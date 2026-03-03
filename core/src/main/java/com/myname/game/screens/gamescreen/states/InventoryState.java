@@ -2,8 +2,15 @@ package com.myname.game.screens.gamescreen.states;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.myname.game.entities.player.Player;
 
 public class InventoryState implements State{
+
+    @Override
+    public EnumState getEnumState() {
+        return EnumState.INVENTORY;
+    }
+
     @Override
     public Animation<TextureRegion> getAnimation() {
         return null;
@@ -21,7 +28,6 @@ public class InventoryState implements State{
 
     @Override
     public void enter() {
-
     }
 
     @Override

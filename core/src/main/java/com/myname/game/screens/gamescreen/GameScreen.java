@@ -91,12 +91,6 @@ public class GameScreen implements Screen, PlayerStatusEventListener {
 
         batch.end();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E))
-        {
-            EventManager.newPlayerStatusEvent(new PlayerStatusEvent(new InventoryState()));
-            inventory.onVisible();
-        }
-
         stage.act();
         stage.draw();
 
