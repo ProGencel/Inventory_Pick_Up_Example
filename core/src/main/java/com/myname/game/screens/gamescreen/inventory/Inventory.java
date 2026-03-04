@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+import com.myname.game.StateGui;
 import com.myname.game.events.EventManager;
 import com.myname.game.events.playerStatusEvent.PlayerStatusEvent;
 import com.myname.game.events.playerStatusEvent.PlayerStatusEventListener;
-import com.myname.game.screens.gamescreen.states.InventoryState;
 import com.myname.game.screens.gamescreen.states.State;
 
 public class Inventory implements PlayerStatusEventListener {
@@ -96,7 +96,7 @@ public class Inventory implements PlayerStatusEventListener {
     @Override
     public void responsePlayerStatusEvent(PlayerStatusEvent event) {
 
-        if(event.getEnumState().equals(State.EnumState.INVENTORY))
+        if(event.getStateGui().equals(StateGui.ONINVENTORY))
         {
             if(!mainTable.isVisible())
             {

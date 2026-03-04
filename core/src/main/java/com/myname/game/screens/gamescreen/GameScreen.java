@@ -1,7 +1,6 @@
 package com.myname.game.screens.gamescreen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.myname.game.StateGui;
 import com.myname.game.entities.HolderStatics;
 import com.myname.game.entities.player.Player;
 import com.myname.game.events.EventManager;
@@ -18,7 +18,6 @@ import com.myname.game.events.playerStatusEvent.PlayerStatusEventListener;
 import com.myname.game.screens.gamescreen.inventory.Inventory;
 import com.myname.game.screens.gamescreen.physic.ContactHandler;
 import com.myname.game.screens.gamescreen.physic.PhysicWorld;
-import com.myname.game.screens.gamescreen.states.InventoryState;
 import com.myname.game.screens.gamescreen.tools.MapCamManager;
 import com.myname.game.screens.gamescreen.utils.Constants;
 
@@ -123,6 +122,5 @@ public class GameScreen implements Screen, PlayerStatusEventListener {
     @Override
     public void responsePlayerStatusEvent(PlayerStatusEvent event) {
         player.getPlayerController().setPlayerState(player.getIdleState());
-        inputMultiplexer.removeProcessor(player.getPlayerController());
     }
 }

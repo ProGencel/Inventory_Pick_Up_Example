@@ -9,7 +9,6 @@ public interface State {
     {
         WALK,
         IDLE,
-        INVENTORY
     }
 
     EnumState getEnumState();

@@ -1,17 +1,17 @@
 package com.myname.game.events.playerStatusEvent;
 
-import com.myname.game.screens.gamescreen.states.State;
+import com.myname.game.StateGui;
 
 public class PlayerStatusEvent {
 
-    private State.EnumState enumState;
+    private StateGui stateGui;
 
-    public PlayerStatusEvent(State.EnumState enumState)
+    public PlayerStatusEvent(StateGui stateGui)
     {
-        this.enumState = enumState;
+        this.stateGui = stateGui;
     }
 
-    public State.EnumState getEnumState() {
-        return enumState;
+    public StateGui getStateGui() {
+        return stateGui;
     }
 }

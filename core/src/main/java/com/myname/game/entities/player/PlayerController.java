@@ -2,17 +2,17 @@ package com.myname.game.entities.player;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.myname.game.StateGui;
 import com.myname.game.events.EventManager;
 import com.myname.game.events.playerStatusEvent.PlayerStatusEvent;
-import com.myname.game.screens.gamescreen.states.IdleState;
-import com.myname.game.screens.gamescreen.states.InventoryState;
+import com.myname.game.screens.gamescreen.GameScreen;
 import com.myname.game.screens.gamescreen.states.State;
-import com.myname.game.screens.gamescreen.states.WalkingState;
 import com.myname.game.screens.gamescreen.utils.ExceptionSafety;
 
 public class PlayerController implements InputProcessor {
 
     private State playerState;
+    private boolean isOnGame = true;
 
     public PlayerController(Player player)
     {
@@ -31,9 +31,10 @@ public class PlayerController implements InputProcessor {
 
         if(keycode == Input.Keys.E)
         {
-            EventManager.newPlayerStatusEvent(new PlayerStatusEvent(State.EnumState.INVENTORY));
+            EventManager.newPlayerStatusEvent(new PlayerStatusEvent(StateGui.ONINVENTORY));
+            isOnGame = !isOnGame;
         }
-        else
+        else if(isOnGame)
         {
             playerState.input(keycode);
         }
