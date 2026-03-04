@@ -14,7 +14,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.myname.game.events.EventManager;
+import com.myname.game.events.itemEvent.ItemEvent;
 import com.myname.game.screens.gamescreen.interfaces.Interactable;
+import com.myname.game.screens.gamescreen.inventory.Inventory;
 import com.myname.game.screens.gamescreen.utils.StaticMethods;
 
 public class StaticEntity extends GameEntity implements Interactable {
@@ -23,6 +26,8 @@ public class StaticEntity extends GameEntity implements Interactable {
     private Rectangle rectangle;
 
     private Body body;
+
+    private boolean isAvailable = true;
 
     private Array<Rectangle> hitboxRecs;
 
@@ -40,6 +45,7 @@ public class StaticEntity extends GameEntity implements Interactable {
 
         hitboxRecs = new Array<>();
         setHitboxRecs(mapObject,world);
+        body.setUserData(this);
     }
 
     private void setHitboxRecs(TiledMapTileMapObject mapObject, World world)
@@ -76,6 +82,17 @@ public class StaticEntity extends GameEntity implements Interactable {
 
     @Override
     public void interact() {
-        System.out.println("asd");
+        EventManager.newItemEvent(new ItemEvent(Inventory.box,this));
+    }
+
+    public void destroyBody(World world)
+    {
+        world.destroyBody(body);
+        isAvailable = false;
+    }
+
+    public boolean getIsAvailable()
+    {
+        return  isAvailable;
     }
 }

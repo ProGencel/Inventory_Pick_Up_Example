@@ -12,9 +12,11 @@ public class PlayerController implements InputProcessor {
 
     private State playerState;
     private boolean isOnGame = true;
+    private Player player;
 
     public PlayerController(Player player)
     {
+        this.player = player;
         setPlayerState(player.getIdleState());
     }
 
@@ -32,6 +34,10 @@ public class PlayerController implements InputProcessor {
         {
             EventManager.newPlayerStatusEvent(new PlayerStatusEvent(StateGui.ONINVENTORY));
             isOnGame = !isOnGame;
+        }
+        else if(keycode == Input.Keys.F)
+        {
+            player.interact();
         }
         else if(isOnGame)
         {

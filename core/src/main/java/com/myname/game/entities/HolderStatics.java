@@ -32,7 +32,10 @@ public class HolderStatics {
     {
         for(StaticEntity entity : statics)
         {
-            entity.draw(batch);
+            if(entity.getIsAvailable())
+            {
+                entity.draw(batch);
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.myname.game.entities.player.Player;
+import com.myname.game.screens.gamescreen.interfaces.Interactable;
 import com.myname.game.screens.gamescreen.states.State;
 
 public class ExceptionSafety {
@@ -50,6 +51,14 @@ public class ExceptionSafety {
         }catch (Exception ignored)
         {
 
+        }
+    }
+
+    public static void interactSafely(Interactable interactable)
+    {
+        if(interactable != null)
+        {
+            interactable.interact();
         }
     }
 

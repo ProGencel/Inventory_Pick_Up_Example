@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -127,6 +128,7 @@ public class Inventory implements PlayerStatusEventListener, ItemEventListener {
     public void responseItemEvent(ItemEvent itemEvent) {
         addLastSlot(itemEvent);
     }
+
 
     public void render(float dt)
     {

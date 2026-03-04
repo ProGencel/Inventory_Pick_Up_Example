@@ -1,11 +1,15 @@
 package com.myname.game.screens.gamescreen.physic;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.myname.game.events.EventManager;
+import com.myname.game.events.itemEvent.ItemEvent;
+import com.myname.game.events.itemEvent.ItemEventListener;
 import com.myname.game.screens.gamescreen.tools.MapCamManager;
 
-public class PhysicWorld {
+public class PhysicWorld implements ItemEventListener {
 
     private World world;
     private float accumulator = 0;
@@ -16,6 +20,7 @@ public class PhysicWorld {
 
     public PhysicWorld(MapCamManager manager)
     {
+        EventManager.subscribe(this);
         this.manager = manager;
 
         world = new World(new Vector2(0,0),true);
@@ -51,6 +56,11 @@ public class PhysicWorld {
     public void dispose()
     {
         world.dispose();
+    }
+
+    @Override
+    public void responseItemEvent(ItemEvent itemEvent) {
+        itemEvent.getStaticEntity().destroyBody(world);
     }
 
 }
