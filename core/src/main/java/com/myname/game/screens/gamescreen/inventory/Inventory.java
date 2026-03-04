@@ -10,11 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.myname.game.StateGui;
 import com.myname.game.events.EventManager;
+import com.myname.game.events.itemEvent.ItemEvent;
+import com.myname.game.events.itemEvent.ItemEventListener;
 import com.myname.game.events.playerStatusEvent.PlayerStatusEvent;
 import com.myname.game.events.playerStatusEvent.PlayerStatusEventListener;
 import com.myname.game.screens.gamescreen.states.State;
 
-public class Inventory implements PlayerStatusEventListener {
+public class Inventory implements PlayerStatusEventListener, ItemEventListener {
 
     private Stage stage;
     private Table mainTable;
@@ -39,7 +41,8 @@ public class Inventory implements PlayerStatusEventListener {
 
         stage.addActor(mainTable);
 
-        EventManager.subscribe(this);
+        EventManager.subscribe((PlayerStatusEventListener) this);
+        EventManager.subscribe((ItemEventListener) this);
     }
 
     public void onVisible()
@@ -71,11 +74,15 @@ public class Inventory implements PlayerStatusEventListener {
 
     private void setSlots(TextureRegionDrawable texture)
     {
-        for(int i = 0; i<5;i++)
+        for(int i = 0; i<4;i++)
         {
-            Slot slot = new Slot(texture);
-            slotArray.add(slot);
-            slotTable.add(slot);
+            for(int j = 0;j<10;j++)
+            {
+                Slot slot = new Slot(texture);
+                slotArray.add(slot);
+                slotTable.add(slot);
+            }
+            slotTable.row();
         }
     }
 
@@ -107,5 +114,10 @@ public class Inventory implements PlayerStatusEventListener {
                 offVisible();
             }
         }
+    }
+
+    @Override
+    public void responseItemEvent(ItemEvent itemEvent) {
+
     }
 }

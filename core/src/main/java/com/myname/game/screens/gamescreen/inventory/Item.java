@@ -9,6 +9,13 @@ public class Item {
     private int amount;
     private TextureRegion icon;
 
+    public Item(int ID, String name, int amount, TextureRegion icon) {
+        this.ID = ID;
+        this.name = name;
+        this.amount = amount;
+        this.icon = icon;
+    }
+
     public TextureRegion getIcon() {
         return icon;
     }
