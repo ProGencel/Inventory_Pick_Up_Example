@@ -1,6 +1,6 @@
 package com.myname.game.events.playerStatusEvent;
 
-import com.myname.game.StateGui;
+import com.myname.game.screens.gamescreen.states.StateGui;
 
 public class PlayerStatusEvent {
 

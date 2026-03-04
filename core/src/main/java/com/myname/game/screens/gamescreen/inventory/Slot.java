@@ -1,11 +1,15 @@
 package com.myname.game.screens.gamescreen.inventory;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
+import static com.myname.game.screens.gamescreen.inventory.Inventory.box;
 
 public class Slot extends Button {
 
@@ -34,6 +38,11 @@ public class Slot extends Button {
         {
             itemImage.setDrawable(new TextureRegionDrawable(item.getIcon()));
         }
+    }
+
+    public Item getItem()
+    {
+        return item;
     }
 
 }

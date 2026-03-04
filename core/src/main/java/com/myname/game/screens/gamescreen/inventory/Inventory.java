@@ -1,20 +1,22 @@
 package com.myname.game.screens.gamescreen.inventory;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.myname.game.StateGui;
+import com.myname.game.screens.gamescreen.states.StateGui;
 import com.myname.game.events.EventManager;
 import com.myname.game.events.itemEvent.ItemEvent;
 import com.myname.game.events.itemEvent.ItemEventListener;
 import com.myname.game.events.playerStatusEvent.PlayerStatusEvent;
 import com.myname.game.events.playerStatusEvent.PlayerStatusEventListener;
-import com.myname.game.screens.gamescreen.states.State;
 
 public class Inventory implements PlayerStatusEventListener, ItemEventListener {
 
@@ -24,8 +26,11 @@ public class Inventory implements PlayerStatusEventListener, ItemEventListener {
 
     private Array<Slot> slotArray;
 
+    public static Item box;
+
     public Inventory(TextureAtlas atlas,Stage stage)
     {
+
         this.stage = stage;
 
         slotArray = new Array<>();
@@ -43,6 +48,8 @@ public class Inventory implements PlayerStatusEventListener, ItemEventListener {
 
         EventManager.subscribe((PlayerStatusEventListener) this);
         EventManager.subscribe((ItemEventListener) this);
+
+        setBox(atlas);
     }
 
     public void onVisible()
@@ -118,6 +125,28 @@ public class Inventory implements PlayerStatusEventListener, ItemEventListener {
 
     @Override
     public void responseItemEvent(ItemEvent itemEvent) {
+        addLastSlot(itemEvent);
+    }
 
+    public void render(float dt)
+    {
+    }
+
+    public void setBox(TextureAtlas atlas)
+    {
+        TextureRegion textureRegion = new TextureRegion(atlas.findRegion("box"));
+        box = new Item(0,"box",textureRegion);
+    }
+
+    private void addLastSlot(ItemEvent event)
+    {
+        for(Slot slot : slotArray)
+        {
+            if(slot.getItem() == null)
+            {
+                slot.setItem(event.getItem());
+                break;
+            }
+        }
     }
 }

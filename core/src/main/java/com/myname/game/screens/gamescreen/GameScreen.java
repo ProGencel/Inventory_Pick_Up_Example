@@ -5,11 +5,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.myname.game.StateGui;
 import com.myname.game.entities.HolderStatics;
 import com.myname.game.entities.player.Player;
 import com.myname.game.events.EventManager;
@@ -42,6 +42,8 @@ public class GameScreen implements Screen, PlayerStatusEventListener {
 
     private Stage stage;
 
+    private FPSLogger fpsLogger = new FPSLogger();
+
     public GameScreen(AssetManager assetManager)
     {
         this.assetManager = assetManager;
@@ -62,7 +64,7 @@ public class GameScreen implements Screen, PlayerStatusEventListener {
         inputMultiplexer.addProcessor(player.getPlayerController());
 
         Gdx.input.setInputProcessor(inputMultiplexer);
-        stage.setDebugAll(true);
+        //stage.setDebugAll(true);
 
         EventManager.subscribe(this);
     }
@@ -91,9 +93,12 @@ public class GameScreen implements Screen, PlayerStatusEventListener {
         batch.end();
 
         stage.act();
+        inventory.render(delta);
         stage.draw();
 
         physicWorld.render();
+
+        fpsLogger.log();
     }
 
     @Override

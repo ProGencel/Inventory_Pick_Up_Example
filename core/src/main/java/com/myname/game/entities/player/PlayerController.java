@@ -2,10 +2,9 @@ package com.myname.game.entities.player;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.myname.game.StateGui;
+import com.myname.game.screens.gamescreen.states.StateGui;
 import com.myname.game.events.EventManager;
 import com.myname.game.events.playerStatusEvent.PlayerStatusEvent;
-import com.myname.game.screens.gamescreen.GameScreen;
 import com.myname.game.screens.gamescreen.states.State;
 import com.myname.game.screens.gamescreen.utils.ExceptionSafety;
 

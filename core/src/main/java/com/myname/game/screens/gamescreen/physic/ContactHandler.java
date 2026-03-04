@@ -1,8 +1,12 @@
 package com.myname.game.screens.gamescreen.physic;
 
+import static com.myname.game.screens.gamescreen.inventory.Inventory.box;
 import static com.myname.game.screens.gamescreen.utils.Constants.*;
+import static com.myname.game.screens.gamescreen.utils.StaticMethods.*;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.myname.game.events.EventManager;
+import com.myname.game.events.itemEvent.ItemEvent;
 
 public class ContactHandler implements ContactListener{
 
@@ -19,18 +23,9 @@ public class ContactHandler implements ContactListener{
         Object dataA = fixtureA.getUserData();
         Object dataB = fixtureB.getUserData();
 
-        if(dataA == null || dataB == null)
+        if(isTheyTheLookingFixtures(PLAYER_SENSOR,STATIC_DATA,dataA,dataB))
         {
-            throw new IllegalStateException("Object data cannot find on contact");
-        }
-
-        if(PLAYER_SENSOR == (int)dataA)
-        {
-
-        }
-        if(PLAYER_SENSOR == (int)dataB)
-        {
-
+            EventManager.newItemEvent(new ItemEvent(box));
         }
     }
 
