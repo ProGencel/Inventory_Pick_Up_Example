@@ -108,6 +108,7 @@ public class GameScreen implements Screen, PlayerStatusEventListener {
         batch.dispose();
         physicWorld.dispose();
         stage.dispose();
+        inventory.dispose();
     }
 
     @Override

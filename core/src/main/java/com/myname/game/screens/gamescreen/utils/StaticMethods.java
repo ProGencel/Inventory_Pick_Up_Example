@@ -56,40 +56,43 @@ public class StaticMethods {
         throw new IllegalStateException("Object cannot find");
     }
 
-    public static Body createBody(BodyDef.BodyType bodyType, World world, Vector2 pos,Vector2 mes, ShapeType shapeType)
+    public static Body createBody(BodyDef.BodyType bodyType, World world, Vector2 pos,Vector2 bodyMeasure)
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
-        bodyDef.position.set(pos.x + mes.x/2,pos.y + mes.y/2);
+        bodyDef.position.set(pos.x + bodyMeasure.x/2,pos.y + bodyMeasure.y/2);
 
         Body body = world.createBody(bodyDef);
 
+        return body;
+    }
+
+    public static Fixture createFixture(Body body,FixtureDef fdef, ShapeType shapeType, Vector2 fixtureMeasure)
+    {
+
         Shape shape = null;
-        FixtureDef fdef = new FixtureDef();
 
         switch (shapeType)
         {
             case Ellipse -> {
                 shape = new CircleShape();
-                shape.setRadius(mes.x/2);
+                shape.setRadius(fixtureMeasure.x/2);
 
                 fdef.shape = shape;
             }
             case Rectangle -> {
                 shape = new PolygonShape();
                 PolygonShape polygonShape = (PolygonShape) shape;
-                polygonShape.setAsBox(mes.x/2,mes.y/2);
+                polygonShape.setAsBox(fixtureMeasure.x/2,fixtureMeasure.y/2);
 
                 fdef.shape = polygonShape;
             }
         }
 
-        body.createFixture(fdef);
+        assert shape != null : "The shape is null";
+        Fixture fixture = body.createFixture(fdef);
+        return fixture;
 
-        assert shape != null : "Shape error !";
-        shape.dispose();
-
-        return body;
     }
 
     public static void ppmShape(Rectangle rectangle)

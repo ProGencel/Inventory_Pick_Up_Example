@@ -29,6 +29,8 @@ public class Inventory implements PlayerStatusEventListener, ItemEventListener {
 
     public static Item box;
 
+    private Texture texture;
+
     public Inventory(TextureAtlas atlas,Stage stage)
     {
 
@@ -100,7 +102,7 @@ public class Inventory implements PlayerStatusEventListener, ItemEventListener {
         pixmap.setColor(0,0,0,0.7f);
         pixmap.fill();
 
-        Texture texture = new Texture(pixmap);
+        texture = new Texture(pixmap);
         TextureRegionDrawable drawable = new TextureRegionDrawable(texture);
 
         mainTable.setBackground(drawable);
@@ -150,5 +152,10 @@ public class Inventory implements PlayerStatusEventListener, ItemEventListener {
                 break;
             }
         }
+    }
+
+    public void dispose()
+    {
+        texture.dispose();
     }
 }

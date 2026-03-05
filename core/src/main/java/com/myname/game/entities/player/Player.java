@@ -40,12 +40,12 @@ public class Player extends GameEntity {
     private Ellipse ellipse;
 
     private Body body;
+    private Fixture mainFixture;
+    private Fixture sensorFixture;
 
     private EllipseMapObject playerCircObj;
 
     private TextureAtlas atlas;
-
-    private Body sensorBody;
 
     public Animation<TextureRegion> idleLeftAnimation;
     public Animation<TextureRegion> idleRightAnimation;
@@ -91,10 +91,7 @@ public class Player extends GameEntity {
         playerController = new PlayerController(this);
         Gdx.input.setInputProcessor(playerController);
 
-        body = StaticMethods.createBody(BodyDef.BodyType.DynamicBody,world,new Vector2(ellipse.x,ellipse.y),
-            new Vector2(ellipse.width,ellipse.height), StaticMethods.ShapeType.Ellipse);
-
-        setSensor();
+        setBox2D(world);
     }
 
     public void interact()
@@ -155,22 +152,26 @@ public class Player extends GameEntity {
         return direction;
     }
 
-    public void setSensor()
+    private void setBox2D(World world)
     {
+        body = StaticMethods.createBody(BodyDef.BodyType.DynamicBody,world,new Vector2(ellipse.x,ellipse.y),
+            new Vector2(ellipse.width,ellipse.height));
         body.setUserData(this);
-        CircleShape sensorShape = new CircleShape();
-        sensorShape.setRadius(Constants.PLAYER_SENSOR_DISTANCE);
+
 
         FixtureDef fdef = new FixtureDef();
+
+        mainFixture = StaticMethods.createFixture(body, fdef, StaticMethods.ShapeType.Ellipse,
+            new Vector2(ellipse.width,ellipse.height));
+        mainFixture.setUserData(PLAYER_HITBOX);
+
+
+        FixtureDef fdef1 = new FixtureDef();
         fdef.isSensor = true;
-        fdef.shape = sensorShape;
 
-        Fixture sensorFixture = body.createFixture(fdef);
+        sensorFixture = StaticMethods.createFixture(body, fdef1, StaticMethods.ShapeType.Ellipse,
+            new Vector2(PLAYER_SENSOR_DISTANCE,0));
         sensorFixture.setUserData(PLAYER_SENSOR);
-
-        body.getFixtureList().first().setUserData(PLAYER_HITBOX);
-
-        sensorShape.dispose();
 
     }
 
