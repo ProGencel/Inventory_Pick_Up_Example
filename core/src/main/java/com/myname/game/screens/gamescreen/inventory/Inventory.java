@@ -146,7 +146,7 @@ public class Inventory implements PlayerStatusEventListener, ItemEventListener {
     {
         for(Slot slot : slotArray)
         {
-            if(slot.getItem() == null)
+            if(slot.getItem() == null || event.getItem() == slot.getItem())
             {
                 slot.setItem(event.getItem());
                 break;
